@@ -24,6 +24,11 @@ public class SelectGameObject : EditorWindow
 
         if (GUILayout.Button("选择"))
         {
+            if (activeTransform == null)
+            {
+                Debug.Log("<color=red>请选中根节点</color>");
+                return;
+            }
             for (int i = 0; i < activeTransform.childCount; i++)
                 if (activeTransform.GetChild(i).name.StartsWith(prefix))
                     objects.Add(activeTransform.GetChild(i).gameObject);
