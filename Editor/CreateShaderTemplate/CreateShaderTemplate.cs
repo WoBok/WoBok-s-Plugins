@@ -2,29 +2,24 @@ using UnityEditor;
 
 public class CreateShaderTemplate : Editor
 {
-    public const string ScriptTemplatePath = "Packages/WoBok's Plugins/Editor/CreateShaderTemplate/ShaderTemplates/";
-
-    [MenuItem("Assets/Create/Shader/Shader1", priority = 1)]
-    static void CreateIComponentDataScript()
+    [MenuItem("Assets/Create/Shader/URP Shader", false, -959)]
+    static void CreateURPShaderFile()
     {
-        ProjectWindowUtil.CreateScriptAssetFromTemplateFile($"{ScriptTemplatePath}URP_PBR_Shader.txt", "NewIComponentDataScript.cs");
+        CreateShaderFile("URPShader", "New URP Shader.shader");
     }
-
-    [MenuItem("\"Assets/Create/Shader/Shader2", priority = 2)]
-    static void CreateISystemScript()
+    [MenuItem("Assets/Create/Shader/URP PBR Shader", false, -958)]
+    static void CreateURPPBRShaderFile()
     {
-        ProjectWindowUtil.CreateScriptAssetFromTemplateFile($"{ScriptTemplatePath}ISystemTemplate.txt", "NewISystemScript.cs");
+        CreateShaderFile("URP_PBR_Shader", "New URP PBR Shader.shader");
     }
-
-    [MenuItem("\"Assets/Create/Shader/Shader3", priority = 3)]
-    static void CreateIJobEntityScript()
+    static void CreateShaderFile(string filePath, string defaultNewFileName)
     {
-        ProjectWindowUtil.CreateScriptAssetFromTemplateFile($"{ScriptTemplatePath}IJobEntityTemplate.txt", "NewIJobEntityScript.cs");
-    }
-
-    [MenuItem("\"Assets/Create/Shader/Shader4", priority = 4)]
-    static void CreateBakerScript()
-    {
-        ProjectWindowUtil.CreateScriptAssetFromTemplateFile($"{ScriptTemplatePath}BakerTemplate.txt", "NewBakerScript.cs");
+        ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
+            0,
+            CreateInstance<DoCreateShaderScritpAsset>(),
+            defaultNewFileName,
+            null,
+            filePath
+            );
     }
 }
